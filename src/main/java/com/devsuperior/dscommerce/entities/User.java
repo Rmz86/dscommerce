@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,9 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@Column(unique = true)
+	private String email;
 	private String phone;
 	private LocalDate bithDate;	
 	private String password;
@@ -30,10 +34,11 @@ public class User {
 	public User() {
 		
 	}
-	
-	public User(Long id, String name, String phone, LocalDate bithDate, String password, String[] roles) {
+		
+	public User(Long id, String name, String email, String phone, LocalDate bithDate, String password) {
 		this.id = id;
 		this.name = name;
+		this.email = email;
 		this.phone = phone;
 		this.bithDate = bithDate;
 		this.password = password;
@@ -53,6 +58,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPhone() {
@@ -78,7 +91,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
